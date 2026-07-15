@@ -15,10 +15,35 @@ export class AiWorkerService implements OnModuleInit, OnModuleDestroy {
   ) {}
 
   onModuleInit(): void {
-    const connection = {
-      host: this.configService.get<string>('REDIS_HOST', 'localhost'),
-      port: this.configService.get<number>('REDIS_PORT', 6379),
-    };
+    const redisUrl =
+      this.configService.get<string>('REDIS_URL') ||
+      this.configService.get<string>('REDIS_URI');
+    const host = this.configService.get<string>('REDIS_HOST', 'localhost');
+    const port = this.configService.get<number>('REDIS_PORT', 6379);
+    const password =
+      this.configService.get<string>('REDIS_PASSWORD') ||
+      this.configService.get<string>('REDIS_PASS');
+    const tls =
+      this.configService.get<string>('REDIS_TLS') === 'true' ||
+      (redisUrl && redisUrl.startsWith('rediss://')) ||
+      (host && host.includes('upstash.io'))
+        ? {}
+        : undefined;
+
+    const connection: any = redisUrl
+      ? {
+          url: redisUrl,
+          maxRetriesPerRequest: null,
+          retryStrategy: (times: number) => (times > 10 ? null : Math.min(times * 500, 5000)),
+        }
+      : {
+          host,
+          port,
+          ...(password ? { password } : {}),
+          ...(tls ? { tls } : {}),
+          maxRetriesPerRequest: null,
+          retryStrategy: (times: number) => (times > 10 ? null : Math.min(times * 500, 5000)),
+        };
 
     this.queue = new Queue('ai-jobs', { connection });
 
