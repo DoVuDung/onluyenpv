@@ -23,6 +23,8 @@ import { SearchModule } from './modules/search/search.module';
         serverSelectionTimeoutMS: 5000,
         socketTimeoutMS: 45000,
         family: 4,
+        tls: true,
+        tlsAllowInvalidCertificates: true,
       }),
       inject: [ConfigService],
     }),
