@@ -88,7 +88,7 @@ export function AiCoachDrawer() {
         }}
         className="animate-glow"
       >
-        <span>🤖</span> AI Coach Assistant
+        AI Coach Assistant
       </button>
 
       {/* Drawer */}
@@ -125,9 +125,11 @@ export function AiCoachDrawer() {
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                fontSize: '1.2rem',
+                fontSize: '0.85rem',
+                fontWeight: 800,
+                color: '#fff',
               }}>
-                🤖
+                AI
               </div>
               <div>
                 <h3 style={{ fontSize: '1.1rem' }}>AI Interview Coach</h3>

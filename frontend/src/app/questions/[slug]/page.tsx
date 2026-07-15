@@ -275,14 +275,14 @@ export default function QuestionDetailPage({
           {/* AI Explanation card when wrong */}
           {aiLoading && (
             <div className="glass-card" style={{ padding: '24px', textAlign: 'center', color: 'var(--primary)' }}>
-              🤖 Generating tailored AI explanation using strict Zod output schemas...
+              Generating tailored AI explanation using strict Zod output schemas...
             </div>
           )}
 
           {aiExplanation && (
             <div className="glass-card" style={{ padding: '24px', border: '1px solid var(--accent)' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px', color: 'var(--accent)', fontWeight: 700 }}>
-                <span>🤖 AI Concept Diagnosis</span>
+                <span>AI Concept Diagnosis</span>
               </div>
               <p style={{ fontSize: '0.95rem', color: 'var(--text-primary)', marginBottom: '12px' }}>
                 <strong>Why incorrect:</strong> {aiExplanation.whyWrong}

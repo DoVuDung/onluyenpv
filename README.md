@@ -34,7 +34,7 @@ Built to scale cleanly to **10 million concurrent candidates**, OnLuyenPV uses a
 | **⚡ Interactive Monaco Studio** | Full browser-based IDE workspace with live syntax checking and starter code execution. | `@monaco-editor/react` |
 | **🧠 SM-2 Spaced Repetition** | Automatically tracks E-Factor and optimal review intervals after every practice attempt. | `Domain SM-2 Engine` |
 | **🏆 Live Timed Contests** | High-concurrency coding arenas with multi-document transactions and real-time socket leaderboards. | `MongoDB Sessions`, `Socket.io` |
-| **🤖 AI Coach & Quiz Studio** | Interactive interview coaching, hint generation, and custom quiz creation verified by strict Zod schemas. | `Central AI Gateway`, `BullMQ` |
+| **AI Coach & Quiz Studio** | Interactive interview coaching, hint generation, and custom quiz creation verified by strict Zod schemas. | `Central AI Gateway`, `BullMQ` |
 | **🔍 Sub-millisecond Search** | Instant keyword lookups with hybrid fallback from Meilisearch to Mongoose repositories. | `Meilisearch Engine` |
 
 ---

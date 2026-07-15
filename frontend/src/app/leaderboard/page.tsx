@@ -7,7 +7,7 @@ export default function LeaderboardPage() {
   const mockGlobalRankings = [
     { rank: 1, name: 'Minh Nguyen', title: 'Principal Engineer at Grab', score: 3420, streak: 45, badges: ['🔥 Top 1%', '🏆 Master'] },
     { rank: 2, name: 'Hoang Le', title: 'Senior Frontend at Shopee', score: 3190, streak: 32, badges: ['⚡ SM-2 Pro'] },
-    { rank: 3, name: 'Thu Tran', title: 'Staff Engineer at VNG', score: 2980, streak: 28, badges: ['🤖 AI Innovator'] },
+    { rank: 3, name: 'Thu Tran', title: 'Staff Engineer at VNG', score: 2980, streak: 28, badges: ['AI Innovator'] },
     { rank: 4, name: 'David Pham', title: 'Frontend Lead at MoMo', score: 2740, streak: 21, badges: ['🌟 Contender'] },
     { rank: 5, name: 'Elena Vo', title: 'Senior Engineer at Atlassian', score: 2610, streak: 19, badges: ['🎯 Focused'] },
   ];
