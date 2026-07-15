@@ -20,11 +20,9 @@ import { SearchModule } from './modules/search/search.module';
         uri:
           configService.get<string>('MONGODB_URI') ??
           'mongodb://localhost:27017/onluyenphongvan?replicaSet=rs0',
-        serverSelectionTimeoutMS: 5000,
+        serverSelectionTimeoutMS: 10000,
         socketTimeoutMS: 45000,
         family: 4,
-        tls: true,
-        tlsAllowInvalidCertificates: true,
       }),
       inject: [ConfigService],
     }),
