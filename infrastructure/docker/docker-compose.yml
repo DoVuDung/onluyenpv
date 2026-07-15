@@ -1,0 +1,60 @@
+services:
+  mongodb:
+    image: mongo:8.0
+    container_name: onluyenphongvan-mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    command: ["--replSet", "rs0", "--bind_ip_all"]
+    environment:
+      MONGO_INITDB_DATABASE: onluyenphongvan
+    volumes:
+      - mongodb_data:/data/db
+    healthcheck:
+      test: echo "try { rs.status() } catch (err) { rs.initiate({_id:'rs0',members:[{_id:0,host:'localhost:27017'}]}) }" | mongosh --port 27017 --quiet
+      interval: 5s
+      timeout: 10s
+      retries: 5
+      start_period: 10s
+
+  mongodb-init:
+    image: mongo:8.0
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    command: >
+      mongosh --host mongodb:27017 --eval "
+        try {
+          rs.initiate({_id:'rs0', members:[{_id:0, host:'mongodb:27017'}]});
+          console.log('Replica Set rs0 initiated successfully.');
+        } catch (e) {
+          console.log('Replica set already initialized or error:', e);
+        }
+      "
+
+  redis:
+    image: redis:7-alpine
+    container_name: onluyenphongvan-redis
+    restart: always
+    ports:
+      - "6379:6379"
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_data:/data
+
+  meilisearch:
+    image: getmeili/meilisearch:v1.12
+    container_name: onluyenphongvan-meilisearch
+    restart: always
+    ports:
+      - "7700:7700"
+    environment:
+      MEILI_MASTER_KEY: masterKey12345678901234567890
+      MEILI_ENV: development
+    volumes:
+      - meili_data:/meili_data
+
+volumes:
+  mongodb_data:
+  redis_data:
+  meili_data:

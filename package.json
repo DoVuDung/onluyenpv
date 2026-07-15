@@ -1,0 +1,22 @@
+{
+  "name": "onluyenphongvan-monorepo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Frontend Interview Platform - High performance, AI-first, Clean Architecture monorepo",
+  "scripts": {
+    "build": "pnpm -r run build",
+    "test": "pnpm -r run test",
+    "typecheck": "pnpm -r run typecheck",
+    "lint": "pnpm -r run lint",
+    "dev:backend": "pnpm --filter backend run dev",
+    "dev:frontend": "pnpm --filter frontend run dev"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.2",
+    "eslint": "^9.21.0"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=9.0.0"
+  }
+}

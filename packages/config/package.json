@@ -1,0 +1,10 @@
+{
+  "name": "@onluyenphongvan/config",
+  "version": "1.0.0",
+  "private": true,
+  "main": "eslint.base.js",
+  "files": [
+    "tsconfig.base.json",
+    "eslint.base.js"
+  ]
+}

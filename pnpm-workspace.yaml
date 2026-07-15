@@ -1,0 +1,10 @@
+packages:
+  - 'packages/*'
+  - 'backend'
+  - 'frontend'
+
+allowBuilds:
+  '@scarf/scarf': set this to true or false
+  msgpackr-extract: set this to true or false
+
+onlyBuiltDependencies: []
