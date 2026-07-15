@@ -44,5 +44,8 @@
     "supertest": "^7.0.0",
     "ts-jest": "^29.2.6",
     "typescript": "^5.8.2"
+  },
+  "engines": {
+    "node": "22.14.0"
   }
 }

@@ -22,6 +22,7 @@ import { SearchModule } from './modules/search/search.module';
           'mongodb://localhost:27017/onluyenphongvan?replicaSet=rs0',
         serverSelectionTimeoutMS: 5000,
         socketTimeoutMS: 45000,
+        family: 4,
       }),
       inject: [ConfigService],
     }),
