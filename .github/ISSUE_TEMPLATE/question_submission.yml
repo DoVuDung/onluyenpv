@@ -1,0 +1,73 @@
+name: 💡 Submit New Frontend Interview Question
+description: Propose a new practice question to be added to the 2,000+ question bank
+title: "[QUESTION]: <Question Title Here>"
+labels: ["question-bank", "community-contribution"]
+body:
+  - type: dropdown
+    id: difficulty
+    attributes:
+      label: Seniority Level / Difficulty
+      description: What target engineering level is this question appropriate for?
+      options:
+        - junior (0-2 Yrs)
+        - middle (2-4 Yrs)
+        - senior (5+ Yrs)
+        - staff (Staff / Principal)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: qtype
+    attributes:
+      label: Question Format Type
+      description: Select the interaction structure of this question.
+      options:
+        - multiple-choice
+        - fill-blank
+        - code-output
+        - coding-challenge
+    validations:
+      required: true
+
+  - type: input
+    id: category
+    attributes:
+      label: Category / Topic
+      description: e.g. React 19, Next.js App Router, Performance & Web Vitals, CSS Grid, System Design
+      placeholder: React 19 Server Components
+    validations:
+      required: true
+
+  - type: textarea
+    id: question_content
+    attributes:
+      label: Question Description (Markdown)
+      description: Provide clear, detailed problem statement using GitHub Flavored Markdown.
+      placeholder: |
+        ### Problem Statement
+        In React 19, what is the primary benefit of replacing `useMemo` with `React Compiler` automatic memoization?
+    validations:
+      required: true
+
+  - type: textarea
+    id: options_or_solution
+    attributes:
+      label: Options / Expected Output / Starter Code
+      description: For multiple choice, list all options and indicate which is correct. For coding challenge, provide Monaco editor starter code.
+      placeholder: |
+        - [ ] A: Automatic bundle splitting across server routes
+        - [x] B: Granular UI component re-render skipping without manual dependency arrays
+        - [ ] C: Conversion of client components to Server Actions
+        - [ ] D: Virtual DOM elimination in favor of direct DOM mutations
+    validations:
+      required: true
+
+  - type: textarea
+    id: explanation
+    attributes:
+      label: Detailed Author Explanation
+      description: Provide clear conceptual breakdown explaining why the answer is correct and why other options fail.
+      placeholder: |
+        **Why correct:** The React Compiler analyzes JavaScript syntax during build-time and automatically memoizes values and functions, eliminating manual boilerplate while guaranteeing UI consistency.
+    validations:
+      required: true
