@@ -11,7 +11,8 @@
     "dev": "pnpm -r --parallel run dev",
     "dev:backend": "pnpm --filter @onluyenphongvan/backend run dev",
     "dev:frontend": "pnpm --filter @onluyenphongvan/frontend run dev",
-    "build:backend": "pnpm --filter @onluyenphongvan/backend run build",
+    "build:backend": "pnpm --filter @onluyenphongvan/types run build && pnpm --filter @onluyenphongvan/backend run build",
+    "build:frontend": "pnpm --filter @onluyenphongvan/types run build && pnpm --filter @onluyenphongvan/frontend run build",
     "start:backend": "node backend/dist/main"
   },
   "devDependencies": {
