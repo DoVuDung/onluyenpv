@@ -10,7 +10,9 @@
     "lint": "pnpm -r run lint",
     "dev": "pnpm -r --parallel run dev",
     "dev:backend": "pnpm --filter @onluyenphongvan/backend run dev",
-    "dev:frontend": "pnpm --filter @onluyenphongvan/frontend run dev"
+    "dev:frontend": "pnpm --filter @onluyenphongvan/frontend run dev",
+    "build:backend": "pnpm --filter @onluyenphongvan/backend run build",
+    "start:backend": "node backend/dist/main"
   },
   "devDependencies": {
     "typescript": "^5.8.2",
