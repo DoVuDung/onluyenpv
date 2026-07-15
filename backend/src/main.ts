@@ -19,8 +19,20 @@ async function bootstrap(): Promise<void> {
   app.useGlobalFilters(new HttpExceptionFilter());
   app.useGlobalInterceptors(new ResponseEnvelopeInterceptor());
 
+  const allowedOrigins = [
+    'http://localhost:3000',
+    ...(process.env['CORS_ORIGINS']?.split(',') ?? []),
+    ...(process.env['FRONTEND_URL'] ? [process.env['FRONTEND_URL']] : []),
+  ];
+
   app.enableCors({
-    origin: process.env['CORS_ORIGINS']?.split(',') ?? ['http://localhost:3000'],
+    origin: (origin, callback) => {
+      if (!origin || allowedOrigins.includes(origin) || origin.endsWith('.vercel.app')) {
+        callback(null, true);
+      } else {
+        callback(null, false);
+      }
+    },
     credentials: true,
   });
 

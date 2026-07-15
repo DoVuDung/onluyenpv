@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: onluyenphongvan-backend
+    runtime: node
+    plan: free
+    buildCommand: pnpm install --frozen-lockfile && pnpm --filter @onluyenphongvan/backend run build
+    startCommand: pnpm --filter @onluyenphongvan/backend run start
+    envVars:
+      - key: PORT
+        value: 3001
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: REDIS_HOST
+        sync: false
+      - key: REDIS_PORT
+        value: 6379
+      - key: JWT_SECRET
+        generateValue: true
+      - key: MEILI_HOST
+        sync: false
+      - key: MEILI_API_KEY
+        sync: false
+      - key: CORS_ORIGINS
+        sync: false
