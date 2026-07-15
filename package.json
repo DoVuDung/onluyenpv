@@ -8,8 +8,9 @@
     "test": "pnpm -r run test",
     "typecheck": "pnpm -r run typecheck",
     "lint": "pnpm -r run lint",
-    "dev:backend": "pnpm --filter backend run dev",
-    "dev:frontend": "pnpm --filter frontend run dev"
+    "dev": "pnpm -r --parallel run dev",
+    "dev:backend": "pnpm --filter @onluyenphongvan/backend run dev",
+    "dev:frontend": "pnpm --filter @onluyenphongvan/frontend run dev"
   },
   "devDependencies": {
     "typescript": "^5.8.2",
