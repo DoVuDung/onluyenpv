@@ -16,6 +16,9 @@ export class CompanyDocumentClass {
 
   @Prop({ required: false })
   logoUrl?: string;
+
+  readonly createdAt!: Date;
+  readonly updatedAt!: Date;
 }
 
 export const CompanySchema = SchemaFactory.createForClass(CompanyDocumentClass);

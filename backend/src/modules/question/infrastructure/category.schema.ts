@@ -19,6 +19,9 @@ export class CategoryDocumentClass {
 
   @Prop({ required: false })
   icon?: string;
+
+  readonly createdAt!: Date;
+  readonly updatedAt!: Date;
 }
 
 export const CategorySchema = SchemaFactory.createForClass(CategoryDocumentClass);

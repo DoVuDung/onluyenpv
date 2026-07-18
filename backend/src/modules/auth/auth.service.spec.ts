@@ -1,7 +1,7 @@
 import { ConflictException, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { AuthService } from './auth.service';
-import { IUserRepository } from './infrastructure/user.repository';
+import { IUserRepository } from './domain/repositories.interface';
 import { RedisService } from '../../shared/redis/redis.service';
 import { User } from '@onluyenphongvan/types';
 

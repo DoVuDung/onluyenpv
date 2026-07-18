@@ -11,4 +11,10 @@
    - `"noFallthroughCasesInSwitch": true`
    - `"noUncheckedIndexedAccess": true`
 4. **Discriminated Unions**: For entities with multiple variations (e.g., `Question` with `multiple-choice` | `fill-blank` | `coding-challenge` | `code-output`), ALWAYS use a discriminated union on a literal `type` field rather than optional `any`/loose fields.
-5. **Boundary Validation**: External inputs (`req.body`, `req.query`, AI LLM outputs, job payloads) MUST be validated using Zod at runtime before being cast to domain or application types.
+5. **Mongoose Timestamps & Property Declarations**: When using `@Schema({ timestamps: true })` on Mongoose document classes, you MUST explicitly declare timestamp properties on the class:
+   ```ts
+   readonly createdAt!: Date;
+   readonly updatedAt!: Date;
+   ```
+   Never use `(doc as unknown as { createdAt: Date })` type assertions in repository mappers.
+6. **Boundary Validation**: External inputs (`req.body`, `req.query`, AI LLM outputs, job payloads) MUST be validated using Zod at runtime before being cast to domain or application types.

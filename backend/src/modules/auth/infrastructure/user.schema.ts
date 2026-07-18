@@ -23,6 +23,9 @@ export class UserDocumentClass {
 
   @Prop({ required: false })
   avatarUrl?: string;
+
+  readonly createdAt!: Date;
+  readonly updatedAt!: Date;
 }
 
 export const UserSchema = SchemaFactory.createForClass(UserDocumentClass);

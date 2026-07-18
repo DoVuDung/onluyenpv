@@ -3,6 +3,7 @@
 ## Core Principles
 1. **MongoDB Only**: The project uses **MongoDB 8.x + Mongoose**. Never suggest, import, or configure PostgreSQL, Prisma, TypeORM, or SQL databases.
 2. **No `Schema.Types.Mixed`**: Every field in Mongoose Schemas must be explicitly typed. Avoid `Mixed`. If absolutely required by dynamic external payloads, it must be validated via Zod and documented.
+   - Never use `@Prop({ type: [Object] })` or `@Prop({ type: Object })`, as Mongoose treats `Object` and `[Object]` as `Schema.Types.Mixed` (`[Mixed]`). Use strongly-typed Mongoose sub-schemas instead.
 3. **Clean Architecture Separation**:
    - **Domain Layer**: Only defines plain TypeScript entities, value objects, and Repository interfaces (`IQuestionRepository`). NO Mongoose imports or decorators allowed here.
    - **Infrastructure Layer**: Implements Repository interfaces using Mongoose (`QuestionRepositoryImpl`), mapping MongoDB Documents to pure Domain entities using explicit mappers.

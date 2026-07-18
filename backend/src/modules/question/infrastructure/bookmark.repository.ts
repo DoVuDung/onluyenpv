@@ -17,7 +17,7 @@ export class BookmarkRepositoryImpl implements IBookmarkRepository {
       _id: doc._id.toString(),
       userId: doc.userId,
       questionId: doc.questionId,
-      createdAt: (doc as unknown as { createdAt: Date }).createdAt || new Date(),
+      createdAt: doc.createdAt || new Date(),
     };
   }
 

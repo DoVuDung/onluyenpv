@@ -3,12 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { User, Role } from '@onluyenphongvan/types';
 import { UserDocument, UserDocumentClass } from './user.schema';
-
-export interface IUserRepository {
-  findById(id: string): Promise<User | null>;
-  findByEmail(email: string): Promise<(User & { passwordHash: string }) | null>;
-  create(data: { email: string; passwordHash: string; name: string; role?: Role }): Promise<User>;
-}
+import { IUserRepository } from '../domain/repositories.interface';
 
 @Injectable()
 export class UserRepositoryImpl implements IUserRepository {
@@ -24,8 +19,8 @@ export class UserRepositoryImpl implements IUserRepository {
       name: doc.name,
       role: doc.role,
       avatarUrl: doc.avatarUrl,
-      createdAt: (doc as unknown as { createdAt: Date }).createdAt || new Date(),
-      updatedAt: (doc as unknown as { updatedAt: Date }).updatedAt || new Date(),
+      createdAt: doc.createdAt || new Date(),
+      updatedAt: doc.updatedAt || new Date(),
     };
   }
 

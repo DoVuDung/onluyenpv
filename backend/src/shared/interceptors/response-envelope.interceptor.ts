@@ -50,6 +50,45 @@ export class ResponseEnvelopeInterceptor<T>
           };
         }
 
+        if (
+          typeof responseValue === 'object' &&
+          responseValue !== null &&
+          'questions' in responseValue &&
+          'nextCursor' in responseValue
+        ) {
+          const res = responseValue as { questions: unknown[]; nextCursor?: string | null; total?: number };
+          const cursorVal = res.nextCursor ?? null;
+          return {
+            data: res.questions as T,
+            meta: {
+              cursor: cursorVal,
+              hasNextPage: Boolean(cursorVal),
+              limit: res.questions.length,
+              total: res.total ?? res.questions.length,
+            },
+            error: null,
+          };
+        }
+
+        if (
+          typeof responseValue === 'object' &&
+          responseValue !== null &&
+          'attempts' in responseValue &&
+          'nextCursor' in responseValue
+        ) {
+          const res = responseValue as { attempts: unknown[]; nextCursor?: string | null };
+          const cursorVal = res.nextCursor ?? null;
+          return {
+            data: res.attempts as T,
+            meta: {
+              cursor: cursorVal,
+              hasNextPage: Boolean(cursorVal),
+              limit: res.attempts.length,
+            },
+            error: null,
+          };
+        }
+
         return {
           data: (responseValue as T) ?? null,
           meta: null,

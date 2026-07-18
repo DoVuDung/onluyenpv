@@ -28,8 +28,8 @@ export class QuestionRepositoryImpl implements IQuestionRepository {
       categoryId: doc.categoryId,
       topicId: doc.topicId,
       companyIds: doc.companyIds,
-      createdAt: (doc as unknown as { createdAt: Date }).createdAt || new Date(),
-      updatedAt: (doc as unknown as { updatedAt: Date }).updatedAt || new Date(),
+      createdAt: doc.createdAt || new Date(),
+      updatedAt: doc.updatedAt || new Date(),
     };
 
     switch (doc.type) {

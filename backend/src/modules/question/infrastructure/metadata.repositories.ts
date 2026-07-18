@@ -28,8 +28,8 @@ export class CategoryRepositoryImpl implements ICategoryRepository {
       name: d.name,
       description: d.description,
       icon: d.icon,
-      createdAt: (d as unknown as { createdAt: Date }).createdAt || new Date(),
-      updatedAt: (d as unknown as { updatedAt: Date }).updatedAt || new Date(),
+      createdAt: d.createdAt || new Date(),
+      updatedAt: d.updatedAt || new Date(),
     }));
   }
 
@@ -42,8 +42,8 @@ export class CategoryRepositoryImpl implements ICategoryRepository {
           name: d.name,
           description: d.description,
           icon: d.icon,
-          createdAt: (d as unknown as { createdAt: Date }).createdAt || new Date(),
-          updatedAt: (d as unknown as { updatedAt: Date }).updatedAt || new Date(),
+          createdAt: d.createdAt || new Date(),
+          updatedAt: d.updatedAt || new Date(),
         }
       : null;
   }
@@ -57,8 +57,8 @@ export class CategoryRepositoryImpl implements ICategoryRepository {
           name: d.name,
           description: d.description,
           icon: d.icon,
-          createdAt: (d as unknown as { createdAt: Date }).createdAt || new Date(),
-          updatedAt: (d as unknown as { updatedAt: Date }).updatedAt || new Date(),
+          createdAt: d.createdAt || new Date(),
+          updatedAt: d.updatedAt || new Date(),
         }
       : null;
   }
@@ -72,8 +72,8 @@ export class CategoryRepositoryImpl implements ICategoryRepository {
       name: d.name,
       description: d.description,
       icon: d.icon,
-      createdAt: (d as unknown as { createdAt: Date }).createdAt || new Date(),
-      updatedAt: (d as unknown as { updatedAt: Date }).updatedAt || new Date(),
+      createdAt: d.createdAt || new Date(),
+      updatedAt: d.updatedAt || new Date(),
     };
   }
 }
@@ -92,8 +92,8 @@ export class TopicRepositoryImpl implements ITopicRepository {
       slug: d.slug,
       name: d.name,
       categoryId: d.categoryId,
-      createdAt: (d as unknown as { createdAt: Date }).createdAt || new Date(),
-      updatedAt: (d as unknown as { updatedAt: Date }).updatedAt || new Date(),
+      createdAt: d.createdAt || new Date(),
+      updatedAt: d.updatedAt || new Date(),
     }));
   }
 }
@@ -112,8 +112,8 @@ export class CompanyRepositoryImpl implements ICompanyRepository {
       slug: d.slug,
       name: d.name,
       logoUrl: d.logoUrl,
-      createdAt: (d as unknown as { createdAt: Date }).createdAt || new Date(),
-      updatedAt: (d as unknown as { updatedAt: Date }).updatedAt || new Date(),
+      createdAt: d.createdAt || new Date(),
+      updatedAt: d.updatedAt || new Date(),
     }));
   }
 
@@ -125,8 +125,8 @@ export class CompanyRepositoryImpl implements ICompanyRepository {
           slug: d.slug,
           name: d.name,
           logoUrl: d.logoUrl,
-          createdAt: (d as unknown as { createdAt: Date }).createdAt || new Date(),
-          updatedAt: (d as unknown as { updatedAt: Date }).updatedAt || new Date(),
+          createdAt: d.createdAt || new Date(),
+          updatedAt: d.updatedAt || new Date(),
         }
       : null;
   }
@@ -139,8 +139,8 @@ export class CompanyRepositoryImpl implements ICompanyRepository {
       slug: d.slug,
       name: d.name,
       logoUrl: d.logoUrl,
-      createdAt: (d as unknown as { createdAt: Date }).createdAt || new Date(),
-      updatedAt: (d as unknown as { updatedAt: Date }).updatedAt || new Date(),
+      createdAt: d.createdAt || new Date(),
+      updatedAt: d.updatedAt || new Date(),
     };
   }
 }
@@ -158,8 +158,8 @@ export class TagRepositoryImpl implements ITagRepository {
       _id: d._id.toString(),
       slug: d.slug,
       name: d.name,
-      createdAt: (d as unknown as { createdAt: Date }).createdAt || new Date(),
-      updatedAt: (d as unknown as { updatedAt: Date }).updatedAt || new Date(),
+      createdAt: d.createdAt || new Date(),
+      updatedAt: d.updatedAt || new Date(),
     }));
   }
 }

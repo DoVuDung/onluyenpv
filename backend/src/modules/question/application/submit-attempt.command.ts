@@ -41,19 +41,29 @@ export class SubmitAttemptHandler
     let isCorrect = false;
 
     if (question.type === 'multiple-choice' && input.selectedOptionId) {
-      const option = question.options.find((o) => o.id === input.selectedOptionId);
+      const option = question.options?.find((o) => o.id === input.selectedOptionId);
       isCorrect = option?.correct ?? false;
     } else if (question.type === 'fill-blank' && input.submittedAnswer) {
       const userAnswers = input.submittedAnswer
         .split(',')
         .map((s: string) => s.trim().toLowerCase());
-      const correctAnswers = question.blanks.map((s: string) => s.trim().toLowerCase());
+      const correctAnswers = (question.blanks ?? []).map((s: string) => s.trim().toLowerCase());
       isCorrect =
         userAnswers.length === correctAnswers.length &&
         userAnswers.every((ans: string, idx: number) => ans === correctAnswers[idx]);
     } else if (question.type === 'code-output' && input.submittedAnswer) {
       isCorrect =
-        input.submittedAnswer.trim() === question.expectedOutput.trim();
+        input.submittedAnswer.trim().toLowerCase() === (question.expectedOutput ?? '').trim().toLowerCase();
+    } else if (question.type === 'coding-challenge' && input.submittedAnswer) {
+      if (question.testCases && question.testCases.length > 0) {
+        isCorrect = question.testCases.every(
+          (tc) =>
+            input.submittedAnswer!.includes(tc.expectedOutput.trim()) ||
+            input.submittedAnswer!.trim() === tc.expectedOutput.trim()
+        );
+      } else {
+        isCorrect = Boolean(input.submittedAnswer.trim());
+      }
     }
 
     const previousAttempt = await this.attemptRepository.findLatestByUserAndQuestion(

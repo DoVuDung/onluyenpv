@@ -4,6 +4,35 @@ import { Difficulty, QuestionOption, TestCase } from '@onluyenphongvan/types';
 
 export type QuestionDocument = QuestionDocumentClass & Document;
 
+@Schema()
+export class QuestionOptionSchemaClass {
+  @Prop({ required: true })
+  id!: string;
+
+  @Prop({ required: true })
+  content!: string;
+
+  @Prop({ required: true })
+  correct!: boolean;
+}
+export const QuestionOptionSubSchema = SchemaFactory.createForClass(QuestionOptionSchemaClass);
+
+@Schema()
+export class TestCaseSchemaClass {
+  @Prop({ required: true })
+  id!: string;
+
+  @Prop({ required: true })
+  input!: string;
+
+  @Prop({ required: true })
+  expectedOutput!: string;
+
+  @Prop({ required: false, default: false })
+  isHidden?: boolean;
+}
+export const TestCaseSubSchema = SchemaFactory.createForClass(TestCaseSchemaClass);
+
 @Schema({
   collection: 'questions',
   timestamps: true,
@@ -27,7 +56,7 @@ export class QuestionDocumentClass {
   @Prop({ required: true, enum: ['multiple-choice', 'fill-blank', 'code-output', 'coding-challenge'], index: true })
   type!: 'multiple-choice' | 'fill-blank' | 'code-output' | 'coding-challenge';
 
-  @Prop({ type: [Object], required: false })
+  @Prop({ type: [QuestionOptionSubSchema], required: false })
   options?: QuestionOption[];
 
   @Prop({ type: [String], required: false })
@@ -42,7 +71,7 @@ export class QuestionDocumentClass {
   @Prop({ required: false })
   starterCode?: string;
 
-  @Prop({ type: [Object], required: false })
+  @Prop({ type: [TestCaseSubSchema], required: false })
   testCases?: TestCase[];
 
   @Prop({ type: [String], required: true, index: true })
@@ -56,6 +85,9 @@ export class QuestionDocumentClass {
 
   @Prop({ type: [String], required: true, index: true })
   companyIds!: string[];
+
+  readonly createdAt!: Date;
+  readonly updatedAt!: Date;
 }
 
 export const QuestionSchema = SchemaFactory.createForClass(QuestionDocumentClass);

@@ -19,6 +19,9 @@ export class RankingDocumentClass {
 
   @Prop({ required: true, default: 0 })
   totalDurationMs!: number;
+
+  readonly createdAt!: Date;
+  readonly updatedAt!: Date;
 }
 
 export const RankingSchema = SchemaFactory.createForClass(RankingDocumentClass);

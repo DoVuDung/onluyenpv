@@ -34,6 +34,9 @@ export class AttemptDocumentClass {
 
   @Prop({ required: true })
   sm2Repetitions!: number;
+
+  readonly createdAt!: Date;
+  readonly updatedAt!: Date;
 }
 
 export const AttemptSchema = SchemaFactory.createForClass(AttemptDocumentClass);

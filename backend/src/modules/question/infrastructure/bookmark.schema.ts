@@ -13,6 +13,9 @@ export class BookmarkDocumentClass {
 
   @Prop({ required: true, index: true })
   questionId!: string;
+
+  readonly createdAt!: Date;
+  readonly updatedAt!: Date;
 }
 
 export const BookmarkSchema = SchemaFactory.createForClass(BookmarkDocumentClass);

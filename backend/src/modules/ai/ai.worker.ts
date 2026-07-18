@@ -1,6 +1,7 @@
 import { Injectable, OnModuleInit, OnModuleDestroy, Logger } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { Queue, Worker, Job } from 'bullmq';
+import { Queue, Worker, Job, ConnectionOptions } from 'bullmq';
+import { aiGenerateQuizInputSchema } from '@onluyenphongvan/types';
 import { AiGatewayService } from './ai-gateway.service';
 
 @Injectable()
@@ -30,7 +31,7 @@ export class AiWorkerService implements OnModuleInit, OnModuleDestroy {
         ? {}
         : undefined;
 
-    const connection: any = redisUrl
+    const connection: ConnectionOptions = redisUrl
       ? {
           url: redisUrl,
           maxRetriesPerRequest: null,
@@ -52,7 +53,8 @@ export class AiWorkerService implements OnModuleInit, OnModuleDestroy {
       async (job: Job) => {
         this.logger.log(`Processing AI job ${job.id} of type ${job.name}`);
         if (job.name === 'generate-batch-quiz') {
-          return this.aiGateway.generateQuiz(job.data as never);
+          const validated = aiGenerateQuizInputSchema.parse(job.data);
+          return this.aiGateway.generateQuiz(validated);
         }
         return null;
       },

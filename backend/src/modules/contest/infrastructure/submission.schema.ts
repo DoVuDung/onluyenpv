@@ -25,6 +25,9 @@ export class SubmissionDocumentClass {
 
   @Prop({ required: true })
   score!: number;
+
+  readonly createdAt!: Date;
+  readonly updatedAt!: Date;
 }
 
 export const SubmissionSchema = SchemaFactory.createForClass(SubmissionDocumentClass);

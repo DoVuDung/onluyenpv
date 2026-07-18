@@ -38,13 +38,34 @@ async function request<T>(
   });
 
   if (!res.ok) {
-    const errorBody = await res.text().catch(() => 'Request failed');
-    throw new Error(`API Error (${res.status}): ${errorBody}`);
+    const errorData = await res.json().catch(async () => ({ message: await res.text().catch(() => 'Request failed') }));
+    const msg =
+      (typeof errorData === 'object' && errorData !== null && 'error' in errorData && (errorData as { error?: { message?: string } }).error?.message) ||
+      (typeof errorData === 'object' && errorData !== null && 'message' in errorData && (errorData as { message?: string }).message) ||
+      'Request failed';
+    throw new Error(`API Error (${res.status}): ${msg}`);
   }
 
   const envelope = await res.json().catch(() => ({ data: null }));
-  // Backend returns ResponseEnvelopeInterceptor: { statusCode, data, timestamp }
-  return (envelope && typeof envelope === 'object' && 'data' in envelope ? envelope.data : envelope) as T;
+  if (envelope && typeof envelope === 'object' && 'data' in envelope) {
+    if (envelope.meta && typeof envelope.meta === 'object' && 'nextCursor' in envelope.meta) {
+      if (Array.isArray(envelope.data) && endpoint.startsWith('/questions') && !endpoint.includes('/attempts')) {
+        return {
+          questions: envelope.data,
+          nextCursor: envelope.meta.nextCursor ?? null,
+          total: (envelope.meta as { total?: number }).total ?? envelope.data.length,
+        } as unknown as T;
+      }
+      if (Array.isArray(envelope.data) && endpoint.startsWith('/questions/attempts')) {
+        return {
+          attempts: envelope.data,
+          nextCursor: envelope.meta.nextCursor ?? null,
+        } as unknown as T;
+      }
+    }
+    return envelope.data as T;
+  }
+  return envelope as T;
 }
 
 export const apiClient = {
@@ -52,14 +73,14 @@ export const apiClient = {
   async register(email: string, passwordHash: string, name: string): Promise<{ user: User; accessToken: string; refreshToken: string }> {
     return request('/auth/register', {
       method: 'POST',
-      body: JSON.stringify({ email, passwordHash, name }),
+      body: JSON.stringify({ email, password: passwordHash, name }),
     });
   },
 
   async login(email: string, passwordHash: string): Promise<{ user: User; accessToken: string; refreshToken: string }> {
     return request('/auth/login', {
       method: 'POST',
-      body: JSON.stringify({ email, passwordHash }),
+      body: JSON.stringify({ email, password: passwordHash }),
     });
   },
 

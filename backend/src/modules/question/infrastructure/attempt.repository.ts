@@ -24,7 +24,7 @@ export class AttemptRepositoryImpl implements IAttemptRepository {
       sm2Interval: doc.sm2Interval,
       sm2EFactor: doc.sm2EFactor,
       sm2Repetitions: doc.sm2Repetitions,
-      createdAt: (doc as unknown as { createdAt: Date }).createdAt || new Date(),
+      createdAt: doc.createdAt || new Date(),
     };
   }
 

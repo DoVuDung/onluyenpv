@@ -16,6 +16,9 @@ export class TopicDocumentClass {
 
   @Prop({ required: true, index: true })
   categoryId!: string;
+
+  readonly createdAt!: Date;
+  readonly updatedAt!: Date;
 }
 
 export const TopicSchema = SchemaFactory.createForClass(TopicDocumentClass);

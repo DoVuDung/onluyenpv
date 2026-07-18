@@ -13,6 +13,9 @@ export class TagDocumentClass {
 
   @Prop({ required: true })
   name!: string;
+
+  readonly createdAt!: Date;
+  readonly updatedAt!: Date;
 }
 
 export const TagSchema = SchemaFactory.createForClass(TagDocumentClass);

@@ -7,7 +7,7 @@ import {
 import { ConfigService } from '@nestjs/config';
 import * as crypto from 'crypto';
 import { User, Role } from '@onluyenphongvan/types';
-import { IUserRepository } from './infrastructure/user.repository';
+import { IUserRepository } from './domain/repositories.interface';
 import { RedisService } from '../../shared/redis/redis.service';
 
 export const USER_REPOSITORY = 'USER_REPOSITORY';

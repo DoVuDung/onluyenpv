@@ -29,6 +29,9 @@ export class ContestDocumentClass {
 
   @Prop({ required: true, enum: ['upcoming', 'live', 'ended'], default: 'upcoming' })
   status!: ContestStatus;
+
+  readonly createdAt!: Date;
+  readonly updatedAt!: Date;
 }
 
 export const ContestSchema = SchemaFactory.createForClass(ContestDocumentClass);
